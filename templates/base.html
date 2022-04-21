@@ -27,7 +27,7 @@
                     <li><a href="#">NEW TASK</a></li>
                     <li><a href="#">MANAGE CATEGORIES</a></li>
                     <li><a href="#">LOG OUT</a></li>
-                    <li><a href="#">LOG IN</a></li>
+                    <li><a href="{{ url_for('login') }}">LOG IN</a></li>
                     <li><a href="{{ url_for('register') }}">REGISTER</a></li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
             <li><a href="#">NEW TASK</a></li>
             <li><a href="#">MANAGE CATEGORIES</a></li>
             <li><a href="#">LOG OUT</a></li>
-            <li><a href="#">LOG IN</a></li>
+            <li><a href="{{ url_for('register') }}">LOG IN</a></li>
             <li><a href="{{ url_for('register') }}">REGISTER</a></li>
         </ul>
     </header>

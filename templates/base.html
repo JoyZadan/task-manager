@@ -23,7 +23,7 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_tasks') }}">HOME</a></li>
-                    <li><a href="#">PROFILE</a></li>
+                    <li><a href="{{ url_for('profile', username=session['session']) }}">PROFILE</a></li>
                     <li><a href="#">NEW TASK</a></li>
                     <li><a href="#">MANAGE CATEGORIES</a></li>
                     <li><a href="#">LOG OUT</a></li>
@@ -37,7 +37,7 @@
         <ul class="sidenav" id="mobile-demo">
             <li><h4 class="center-align light-blue-text text-darken-4">TASK MANAGER</h4></li>
             <li><a href="{{ url_for('get_tasks') }}">HOME</a></li>
-            <li><a href="#">PROFILE</a></li>
+            <li><a href="{{ url_for('profile', username=session['session']) }}">PROFILE</a></li>
             <li><a href="#">NEW TASK</a></li>
             <li><a href="#">MANAGE CATEGORIES</a></li>
             <li><a href="#">LOG OUT</a></li>

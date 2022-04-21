@@ -15,6 +15,37 @@
 </head>
 <body>
 
+    <header>
+        <!-- top navbar -->
+        <nav class="nav-extended text-shadow blue darken-1">
+            <div class="nav-wrapper">
+                <a href="{{ url_for('get_tasks') }}" class="brand-logo">TASK MANAGER</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ url_for('get_tasks') }}">HOME</a></li>
+                    <li><a href="#">PROFILE</a></li>
+                    <li><a href="#">NEW TASK</a></li>
+                    <li><a href="#">MANAGE CATEGORIES</a></li>
+                    <li><a href="#">LOG OUT</a></li>
+                    <li><a href="#">LOG IN</a></li>
+                    <li><a href="#">REGISTER</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- mobile sidenav -->
+        <ul class="sidenav" id="mobile-demo">
+            <li><h4 class="center-align light-blue-text text-darken-4">TASK MANAGER</h4></li>
+            <li><a href="{{ url_for('get_tasks') }}">HOME</a></li>
+            <li><a href="#">PROFILE</a></li>
+            <li><a href="#">NEW TASK</a></li>
+            <li><a href="#">MANAGE CATEGORIES</a></li>
+            <li><a href="#">LOG OUT</a></li>
+            <li><a href="#">LOG IN</a></li>
+            <li><a href="#">REGISTER</a></li>
+        </ul>
+    </header>
+
     {% block content %}
 
     {% endblock%}

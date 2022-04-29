@@ -27,7 +27,7 @@ def get_tasks():
     """
     docstrings
     """
-    tasks = mongo.db.tasks.find()
+    tasks = list(mongo.db.tasks.find())
     return render_template("tasks.html", tasks=tasks)
 
 

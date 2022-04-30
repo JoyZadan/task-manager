@@ -94,7 +94,7 @@ def login():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     """
-    docstrings
+    Check if user profile exists, else redirect to login page
     """
     # grab the session user's username from db
     username = mongo.db.users.find_one(
@@ -110,7 +110,7 @@ def profile(username):
 @app.route("/logout")
 def logout():
     """
-    docstrings
+    Logout user
     """
     # remove user from session cookies
     flash("You have been logged out")
@@ -121,7 +121,7 @@ def logout():
 @app.route("/add_task",  methods=["GET", "POST"])
 def add_task():
     """
-    docstrings
+    Add a task
     """
     if request.method == "POST":
         is_urgent = "on" if request.form.get("is_urgent") else "off"
@@ -144,7 +144,7 @@ def add_task():
 @app.route("/edit_task/<task_id>", methods=["GET", "POST"])
 def edit_task(task_id):
     """
-    docstrings
+    Edit a task
     """
     if request.method == "POST":
         is_urgent = "on" if request.form.get("is_urgent") else "off"
@@ -162,6 +162,16 @@ def edit_task(task_id):
     task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("edit_task.html", task=task, categories=categories)
+
+
+@app.route("/delete_task/<task_id>")
+def delete_task(task_id):
+    """
+    Delete a task
+    """
+    mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
+    flash("Task Successfully Deleted")
+    return redirect(url_for("get_tasks"))
 
 
 if __name__ == "__main__":

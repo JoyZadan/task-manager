@@ -9,3 +9,18 @@
 .margin-left {
     margin-left: 0.75rem;
 }
+
+.btn-small {
+    margin: 5px;
+}
+
+.transparent-bg {
+    background-color: transparent;
+    border: 1px solid red;
+}
+
+.col,
+.strong {
+    margin: 5px;
+    line-height: 2.625rem;
+}

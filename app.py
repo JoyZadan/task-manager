@@ -64,7 +64,8 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
-    Check if user already exists in db, check if password matches with username,
+    Check if user already exists in db, check if password matches
+    with username,
     login user if username and password both match
     redirect user to login if username or password does not match
     """
@@ -203,6 +204,24 @@ def add_category():
         return redirect(url_for("get_categories"))
 
     return render_template("add_category.html")
+
+
+@app.route("/edit_category/<category_id>", methods=["GET", "POST"])
+def edit_category(category_id):
+    """
+    Edit a category
+    """
+    if request.method == "POST":
+        submit = {
+            "category_name": request.form.get("category_name")
+        }
+        mongo.db.categories.update_one({"_id": ObjectId(category_id)},
+                                       {"$set": submit})
+        flash("Category Successfully Updated")
+        return redirect(url_for("get_categories"))
+
+    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+    return render_template("edit_category.html", category=category)
 
 
 if __name__ == "__main__":

@@ -26,7 +26,9 @@
                     {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">PROFILE</a></li>
                         <li><a href="{{ url_for('add_task') }}">NEW TASK</a></li>
-                        <li><a href="#">MANAGE CATEGORIES</a></li>
+                        {% if session.user|lower == "admin"| lower %}
+                            <li><a href="{{ url_for('get_categories') }}">MANAGE CATEGORIES</a></li>
+                        {% endif %}
                         <li><a href="{{ url_for('logout') }}">LOG OUT</a></li>
                     {% else %}
                         <li><a href="{{ url_for('login') }}">LOG IN</a></li>
@@ -43,7 +45,9 @@
             {% if session.user %}
                 <li><a href="{{ url_for('profile', username=session['user']) }}">PROFILE</a></li>
                 <li><a href="{{ url_for('add_task') }}">NEW TASK</a></li>
-                <li><a href="#">MANAGE CATEGORIES</a></li>
+                {% if session.user|lower == "admin"| lower %}
+                    <li><a href="{{ url_for('get_categories') }}">MANAGE CATEGORIES</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('logout') }}">LOG OUT</a></li>
             {% else %}
                 <li><a href="{{ url_for('login') }}">LOG IN</a></li>

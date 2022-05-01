@@ -25,7 +25,7 @@ mongo = PyMongo(app)
 @app.route("/get_tasks")
 def get_tasks():
     """
-    docstrings
+    Gets tasks
     """
     tasks = list(mongo.db.tasks.find())
     return render_template("tasks.html", tasks=tasks)
@@ -34,7 +34,9 @@ def get_tasks():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
-    docstrings
+    Checks if username already exists,
+    registers user and saves username and password
+    puts the user into 'session' cookie after successful registration
     """
     if request.method == "POST":
         # check if username already exists in db
@@ -62,7 +64,9 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
-    docstrings
+    Check if user already exists in db, check if password matches with username,
+    login user if username and password both match
+    redirect user to login if username or password does not match
     """
     if request.method == "POST":
         # check if username exists in db
@@ -177,10 +181,28 @@ def delete_task(task_id):
 @app.route("/get_categories")
 def get_categories():
     """
-    docstrings
+    Get and manage categories
     """
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template("categories.html", categories=categories)
+
+
+@app.route("/add_category", methods=["GET", "POST"])
+def add_category():
+    """
+    Enables admin user to add category
+    Reminder: always start with the GET method to make sure
+    templates are loading correctly
+    """
+    if request.method == "POST":
+        category = {
+            "category_name": request.form.get("category_name")
+        }
+        mongo.db.categories.insert_one(category)
+        flash("New Category Added")
+        return redirect(url_for("get_categories"))
+
+    return render_template("add_category.html")
 
 
 if __name__ == "__main__":
